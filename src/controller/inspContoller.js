@@ -4,13 +4,23 @@ const inspModel = require("../model/inspModel");
 
 const inspected_items = async (req, res) => {
     const { TIM_Key , inspected_items, status, comments, image_path, created_by, disAgree_condition , TIIM_key, upd_key, uad_key} = req.body;
+    //   if (!TIM_Key || !inspected_items || !status || !comments || !image_path || !created_by || !disAgree_condition || !TIIM_key || !upd_key || !uad_key)
+    //     {
+    //         return res.status(200).json({
+    //             success: true,
+    //             error: false,
+    //             message: "all fields are required!",
+               
+    //         });
+    //     }
+
 
     try {
       const results = await inspModel.inspected_items(TIM_Key, inspected_items, status, comments, image_path,created_by, disAgree_condition , TIIM_key, upd_key, uad_key);    
         if (inspected_items === 1) {
             return res.status(200).json({
                 success: true,
-                message: "User agrees with condition.",
+                message: "data insert successfully.",
                 data: results[0][0][0]
             });
         } else if (inspected_items === 0) {

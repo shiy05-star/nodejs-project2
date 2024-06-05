@@ -1,11 +1,27 @@
 const express = require("express");
 const router = express.Router();
 const upController = require('../controller/upController');
+const path = require("path");
+const multer = require("multer");
 
 
-const multer = require('multer');
-const uploadStorage = multer({ dest: 'uploads/' });
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, './upload'); 
+    },
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname);
+      cb(null, file.fieldname + '-' + Date.now() + ext);
+    }
+  });
 
-router.post('/upload', uploadStorage.array("images", 10), upController.upload_master); 
+  const upload = multer({ 
+    storage: storage,
+    limits: { fileSize: 10 * 1024 * 1024 } 
+  }).any('image_path');
+
+const uploadStorage = upload
+router.use('/image_path', express.static('upload'));
+router.post('/upload', uploadStorage, upController.upload_master); 
 
 module.exports = router;
