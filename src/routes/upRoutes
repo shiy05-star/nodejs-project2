@@ -15,10 +15,15 @@ const storage = multer.diskStorage({
     }
   });
 
+  // const upload = multer({ 
+  //   storage: storage,
+  //   limits: { fileSize: 10 * 1024 * 1024 } 
+  // }).any('image_path');
+  
   const upload = multer({ 
     storage: storage,
     limits: { fileSize: 10 * 1024 * 1024 } 
-  }).any('image_path');
+}).array('imagePaths', 10);
 
 const uploadStorage = upload
 router.use('/image_path', express.static('upload'));
