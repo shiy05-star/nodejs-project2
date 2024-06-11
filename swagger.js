@@ -1,0 +1,47 @@
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
+
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'RESTful API for Node.js',
+      description: 'API endpoints for services documented on Swagger',
+      version: '1.0.0',
+    },
+    servers: [
+      {
+        url: 'http://localhost:8000',
+        description: 'local server',
+      },
+      {
+        url: 'https://kodietestapi.cylsys.com',
+        description: 'development server',
+      },
+    ],
+  },
+
+  apis: ['src/routes/inspRoutes.js'],
+};
+const swaggerDocs = swaggerJsdoc(options);
+console.log(swaggerDocs);
+
+
+function swaggerDocs1(app) {
+  
+  app.use('/api/v2', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+  app.get('/', (req, res) => {
+    res.send('Welcome to Node.js');
+  });
+
+
+  app.get('/docs.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerDocs);
+  });
+}
+
+
+module.exports = {options , swaggerDocs1};

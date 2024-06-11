@@ -29,4 +29,16 @@ const uploadStorage = upload
 router.use('/image_path', express.static('upload'));
 router.post('/upload', uploadStorage, upController.upload_master); 
 
+  /**
+   * @swagger
+   * /sample:
+   *   get:
+   *     summary: check ispected items
+   *     description: swagger is used to create restful nodejs api
+   *     responses:
+   *       200:
+   *         description:  Details added Successful
+   */
+
+
 module.exports = router;
