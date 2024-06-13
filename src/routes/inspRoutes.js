@@ -25,15 +25,20 @@ router.use('/imagePaths', express.static('upload'));
 // router.post('/upload', uploadStorage, inspController.upload_master); 
 
 
-router.post('/inspected', uploadStorage, inspController.inspected);
+router.post('/cabinets', uploadStorage, inspController.inspected);
+router.get('/status/repairItems' ,inspController.repairItems );
+router.get('/status/demageItems' ,inspController.demageItems );
+router.get('/status' ,inspController.check_status );
+
+
 
 /**
  * @swagger
- * /api/v2/inspected:
+ * /api/v1/cabinets:
  *   post:
  *     tags:
- *       - inspected_items list api
- *     summary: Used to create an item in the inspected_items list
+ *       - cabinetController
+ *     summary: Used to create an item in the cabinet list
  *     requestBody:
  *       required: true
  *       content:
@@ -42,30 +47,37 @@ router.post('/inspected', uploadStorage, inspController.inspected);
  *             type: object
  *             properties:
  *               TIM_Key:
- *                 type: string
+ *                 type: integer
  *               inspected_items:
- *                 type: string
- *               status:
+ *                 type: integer
+ *               timc_status:
  *                 type: string
  *               comments:
  *                 type: string
  *               imagePaths:
- *                 type: string
- *                 format: binary
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
  *               created_by:
- *                 type: string
+ *                 type: integer
  *               TIIM_key:
- *                 type: string
+ *                 type: integer
  *               upd_key:
- *                 type: string
+ *                 type: integer
  *               uad_key:
- *                 type: string
+ *                 type: integer
  *     responses:
  *       '200':
  *         description: Fetched Successfully
  *       '400':
  *         description: Bad request - Missing or invalid parameters
  */
+
+
+
+
+
 
 
 module.exports = router;

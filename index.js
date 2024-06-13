@@ -12,8 +12,8 @@ const port = process.env.PORT || 8000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/api/v2/',inspRoutes);
-app.use('/api/v2/',upRoutes);
+app.use('/api/v1/',inspRoutes);
+app.use('/api/v1/',upRoutes);
 
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);

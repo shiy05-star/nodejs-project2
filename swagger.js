@@ -25,12 +25,12 @@ const options = {
   apis: ['src/routes/inspRoutes.js'],
 };
 const swaggerDocs = swaggerJsdoc(options);
-console.log(swaggerDocs);
+// console.log(swaggerDocs);
 
 
 function swaggerDocs1(app) {
   
-  app.use('/api/v2', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+  app.use('/api/v1', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
   app.get('/', (req, res) => {
     res.send('Welcome to Node.js');

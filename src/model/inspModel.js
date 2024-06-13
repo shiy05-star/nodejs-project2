@@ -30,8 +30,55 @@ const dbConn = require("../../config/dbConfigure");
       })    
      
     }
+
+//==========================
+
+const repairItems = async () =>{
+  const query= 'CALL kodie_new.USP_KODIE_GET_REPAIR_STATUS_SS()';
+      return new Promise ((resolve, reject) =>{
+       dbConn.query(query, [], (err, result) =>{
+          if (err){
+              return reject(err);
+          }
+          resolve(result);
+       })
+       
+      })  
+}
+// damaged
+const demageItems = async () =>{
+  const query= 'CALL kodie_new.USP_KODIE_GET_DAMAGED_STATUS_SS()';
+      return new Promise ((resolve, reject) =>{
+       dbConn.query(query, [], (err, result) =>{
+          if (err){
+              return reject(err);
+          }
+          resolve(result);
+       })
+       
+      })  
+}
+
+
+//check statu
+const check_status = async () =>{
+  const query= 'CALL kodie_new.`USP_KODIE_GET_R/D_STATUS_SS`()';
+      return new Promise ((resolve, reject) =>{
+       dbConn.query(query, [], (err, result) =>{
+          if (err){
+              return reject(err);
+          }
+          resolve(result);
+       })
+       
+      })  
+}
   
   module.exports = {
     inspected,
-    inspectedImages
+    inspectedImages,
+    repairItems,
+    demageItems,
+    check_status
+  
   };
