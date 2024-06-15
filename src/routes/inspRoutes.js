@@ -74,10 +74,53 @@ router.get('/status' ,inspController.check_status );
  *         description: Bad request - Missing or invalid parameters
  */
 
+// ===================================
 
-
-
+/**
+ * @swagger
+ * /api/v1/status:
+ *   get:
+ *     tags:
+ *       - cabinetController
+ *     summary: Check Cabinets Status/ By tim_key
+ *     requestBody:
+ *       required: true
+ *       content:
+ *        application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               TIM_Key:
+ *                 type: integer
+ *        responses:
+ *        200:
+ *         description: Status details retrieved successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               error: false
+ *               data:
+ *               message: "Status details retrieved successfully"
+ *        404:
+ *         description: Status details not found
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: false
+ *               error: true
+ *               message: "Status details not found"
+ *        500:
+ *         description: Error retrieving Status details
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: false
+ *               error: true
+ *               message: "Error retrieving Status details."
+ */
 
 
 
 module.exports = router;
+
